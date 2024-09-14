@@ -6,6 +6,12 @@ namespace StudentApp
     {
         private string _name;
         public int Age { get; set; }
+        
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
 
         public Student(string name)
         {
@@ -34,17 +40,16 @@ namespace StudentApp
     {
         static void Main(string[] args)
         {
-            Student student1 = new Student("Genie");
+            Student student1 = new Student("Andrey");
             Console.WriteLine(student1.WriteInfo());
 
-            student1.BecomeOlder();
-            Console.WriteLine("На следующий год" + student1.WriteInfo());
+            student1.Name = "Alex";
+            Console.WriteLine(student1.WriteInfo());
 
-            Student student2 = new Student("Bob", 22);
+            Student student2 = new Student("Steve", 19);
             Console.WriteLine(student2.WriteInfo());
-
             student2.BecomeOlder();
-            Console.WriteLine("На следующий год" + student2.WriteInfo());
+            Console.WriteLine("Через год " + student2.WriteInfo());
         }
     }
 }
