@@ -35,12 +35,14 @@ namespace StudentApp
         {
             _name = "Andrey";
             Age = 18;
+            StudentManager.AddStudent(this);
         }
 
         public Student(string name, int age)
         {
             _name = name;
             Age = age;
+            StudentManager.AddStudent(this);
         }
 
         public static void CompletedHisStudies(Student person)  // Статичный метод
@@ -62,6 +64,32 @@ namespace StudentApp
         }
     }
 
+    public static class StudentManager      // Статический класс связанный с классом Student
+    {
+        private static List<Student> students = new List<Student>();
+
+        public static void AddStudent(Student student)
+        {
+            students.Add(student);
+        }
+
+        public static double CalculateAverageAge()
+        {
+            if (students.Count == 0)
+                return 0;
+
+            return students.Average(student => student.Age);
+        }
+
+        public static void PrintAllStudents()
+        {
+            foreach (var student in students)
+            {
+                Console.WriteLine(student.WriteInfo());
+            }
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -79,8 +107,10 @@ namespace StudentApp
             Student.CompletedHisStudies(kane);
 
             Console.WriteLine($"\nКурсов всего: {Student.TotalCourses}");
-            Student.TotalCourses = 10;
-            Console.WriteLine($"\nКурсов всего: {Student.TotalCourses} - смерть");
+
+            Console.WriteLine("---------------------------------------");
+            StudentManager.PrintAllStudents();
+            Console.WriteLine($"\nСредний возраст студентов: {StudentManager.CalculateAverageAge()}");
         }
     }
 }
