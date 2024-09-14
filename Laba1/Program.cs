@@ -27,7 +27,7 @@ namespace StudentApp
 
         public string WriteInfo()
         {
-            return $"Имя: {_name}, Возраст: {Age}";
+            return $"Имя студента: {_name}, Возраст: {Age}";
         }
 
         public void BecomeOlder()
