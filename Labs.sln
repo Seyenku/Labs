@@ -5,11 +5,13 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Laba1", "Laba1\Laba1.csproj", "{019BAAE9-8ADE-4B3B-B064-CBAB77D47D14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laba2", "Laba2\Laba2.csproj", "{9B8E39E1-BF51-4148-9877-A74E5320F6DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Laba2", "Laba2\Laba2.csproj", "{9B8E39E1-BF51-4148-9877-A74E5320F6DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laba3", "Laba3\Laba3.csproj", "{DD9BE271-0BDD-4C2F-91AF-25296980E614}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Laba3", "Laba3\Laba3.csproj", "{DD9BE271-0BDD-4C2F-91AF-25296980E614}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laba4", "Laba4\Laba4.csproj", "{83E0966D-AB14-419D-B8A4-54B912A94DF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Laba4", "Laba4\Laba4.csproj", "{83E0966D-AB14-419D-B8A4-54B912A94DF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laba5", "Laba5\Laba5.csproj", "{2E92AE30-8FEC-4A36-8302-FF2665B9846D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{83E0966D-AB14-419D-B8A4-54B912A94DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83E0966D-AB14-419D-B8A4-54B912A94DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83E0966D-AB14-419D-B8A4-54B912A94DF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E92AE30-8FEC-4A36-8302-FF2665B9846D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E92AE30-8FEC-4A36-8302-FF2665B9846D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E92AE30-8FEC-4A36-8302-FF2665B9846D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E92AE30-8FEC-4A36-8302-FF2665B9846D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
