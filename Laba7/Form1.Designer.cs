@@ -45,24 +45,31 @@
             LabelFIO = new Label();
             TextBoxFIO = new TextBox();
             panel1 = new Panel();
+            RecordBook = new DataGridViewTextBoxColumn();
+            FIO = new DataGridViewTextBoxColumn();
+            Group = new DataGridViewTextBoxColumn();
+            Department = new DataGridViewTextBoxColumn();
+            Specification = new DataGridViewTextBoxColumn();
+            DateOfAdmission = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)DGViewStudents).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // DGViewStudents
             // 
+            DGViewStudents.AllowUserToAddRows = false;
             DGViewStudents.AllowUserToDeleteRows = false;
-            DGViewStudents.AllowUserToResizeColumns = false;
             DGViewStudents.AllowUserToResizeRows = false;
             DGViewStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DGViewStudents.Columns.AddRange(new DataGridViewColumn[] { RecordBook, FIO, Group, Department, Specification, DateOfAdmission });
             DGViewStudents.Dock = DockStyle.Fill;
             DGViewStudents.Location = new Point(0, 0);
             DGViewStudents.Margin = new Padding(0);
             DGViewStudents.MultiSelect = false;
             DGViewStudents.Name = "DGViewStudents";
             DGViewStudents.ReadOnly = true;
-            DGViewStudents.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            DGViewStudents.Size = new Size(800, 487);
+            DGViewStudents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGViewStudents.Size = new Size(800, 342);
             DGViewStudents.TabIndex = 0;
             DGViewStudents.SelectionChanged += DGViewStudents_SelectionChanged;
             // 
@@ -70,6 +77,7 @@
             // 
             ComboBoxDepart.Anchor = AnchorStyles.None;
             ComboBoxDepart.FormattingEnabled = true;
+            ComboBoxDepart.Items.AddRange(new object[] { "ИТНИТ", "ИЭУ" });
             ComboBoxDepart.Location = new Point(246, 30);
             ComboBoxDepart.Margin = new Padding(15, 3, 3, 3);
             ComboBoxDepart.Name = "ComboBoxDepart";
@@ -94,7 +102,6 @@
             AddBtn.TabIndex = 3;
             AddBtn.Text = "Создать";
             AddBtn.UseVisualStyleBackColor = false;
-            AddBtn.Click += AddBtn_Click;
             // 
             // ChangeBtn
             // 
@@ -106,7 +113,6 @@
             ChangeBtn.TabIndex = 4;
             ChangeBtn.Text = "Изменить";
             ChangeBtn.UseVisualStyleBackColor = false;
-            ChangeBtn.Click += ChangeBtn_Click;
             // 
             // DelBtn
             // 
@@ -118,7 +124,6 @@
             DelBtn.TabIndex = 5;
             DelBtn.Text = "Удалить";
             DelBtn.UseVisualStyleBackColor = false;
-            DelBtn.Click += DelBtn_Click;
             // 
             // ComboBoxSpec
             // 
@@ -217,34 +222,79 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(LabelDepart);
-            panel1.Controls.Add(LabelFIO);
-            panel1.Controls.Add(ComboBoxDepart);
-            panel1.Controls.Add(TextBoxFIO);
-            panel1.Controls.Add(TextBoxGroup);
             panel1.Controls.Add(LabelRecBook);
-            panel1.Controls.Add(AddBtn);
             panel1.Controls.Add(TextBoxRec);
-            panel1.Controls.Add(ChangeBtn);
-            panel1.Controls.Add(LabelGroup);
-            panel1.Controls.Add(DelBtn);
-            panel1.Controls.Add(LabelDateAdmiss);
-            panel1.Controls.Add(ComboBoxSpec);
-            panel1.Controls.Add(TPDateAdmiss);
+            panel1.Controls.Add(LabelFIO);
+            panel1.Controls.Add(TextBoxFIO);
+            panel1.Controls.Add(LabelDepart);
+            panel1.Controls.Add(ComboBoxDepart);
             panel1.Controls.Add(LabelSpec);
+            panel1.Controls.Add(ComboBoxSpec);
+            panel1.Controls.Add(LabelDateAdmiss);
+            panel1.Controls.Add(TPDateAdmiss);
+            panel1.Controls.Add(LabelGroup);
+            panel1.Controls.Add(TextBoxGroup);
+            panel1.Controls.Add(AddBtn);
+            panel1.Controls.Add(ChangeBtn);
+            panel1.Controls.Add(DelBtn);
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(0, 342);
             panel1.Name = "panel1";
             panel1.Size = new Size(800, 145);
             panel1.TabIndex = 16;
             // 
+            // RecordBook
+            // 
+            RecordBook.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            RecordBook.HeaderText = "Номер зачетки";
+            RecordBook.Name = "RecordBook";
+            RecordBook.ReadOnly = true;
+            RecordBook.Width = 106;
+            // 
+            // FIO
+            // 
+            FIO.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            FIO.HeaderText = "ФИО";
+            FIO.Name = "FIO";
+            FIO.ReadOnly = true;
+            // 
+            // Group
+            // 
+            Group.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Group.HeaderText = "Группа";
+            Group.Name = "Group";
+            Group.ReadOnly = true;
+            Group.Width = 71;
+            // 
+            // Department
+            // 
+            Department.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Department.HeaderText = "Институт";
+            Department.Name = "Department";
+            Department.ReadOnly = true;
+            // 
+            // Specification
+            // 
+            Specification.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Specification.HeaderText = "Направление";
+            Specification.Name = "Specification";
+            Specification.ReadOnly = true;
+            // 
+            // DateOfAdmission
+            // 
+            DateOfAdmission.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            DateOfAdmission.HeaderText = "Дата поступления";
+            DateOfAdmission.Name = "DateOfAdmission";
+            DateOfAdmission.ReadOnly = true;
+            DateOfAdmission.Width = 120;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 487);
-            Controls.Add(panel1);
             Controls.Add(DGViewStudents);
+            Controls.Add(panel1);
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)DGViewStudents).EndInit();
@@ -272,5 +322,11 @@
         private Label LabelFIO;
         private TextBox TextBoxFIO;
         private Panel panel1;
+        private DataGridViewTextBoxColumn RecordBook;
+        private DataGridViewTextBoxColumn FIO;
+        private DataGridViewTextBoxColumn Group;
+        private DataGridViewTextBoxColumn Department;
+        private DataGridViewTextBoxColumn Specification;
+        private DataGridViewTextBoxColumn DateOfAdmission;
     }
 }
