@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace StudentApp
+﻿namespace StudentApp
 {
     public class Subject
     {

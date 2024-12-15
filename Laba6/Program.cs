@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace StudentApp
+﻿namespace StudentApp
 {
     abstract class Person
     {
@@ -69,7 +67,7 @@ namespace StudentApp
                 // Попытка создать студента с недопустимыми параметрами
                 Student invalidStudent2 = new Student("", 18);
                 Student invalidStudent = new Student("Sasha", -1);
-                
+
             }
             catch (ArgumentException ex) when (ex.Message.Contains("Имя"))
             {

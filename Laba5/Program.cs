@@ -1,7 +1,4 @@
-﻿using System;
-using System.Xml.Serialization;
-
-namespace StudentApp
+﻿namespace StudentApp
 {
     interface IPerson
     {

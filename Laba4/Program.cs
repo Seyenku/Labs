@@ -1,7 +1,4 @@
-﻿using System;
-using System.Xml.Serialization;
-
-namespace StudentApp
+﻿namespace StudentApp
 {
     abstract class Person
     {
@@ -21,8 +18,8 @@ namespace StudentApp
             get => _name;
             set => _name = value;
         }
-        public Student(string name, int age) 
-        { 
+        public Student(string name, int age)
+        {
             _name = name;
             Age = age;
         }

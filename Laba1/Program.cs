@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace StudentApp
+﻿namespace StudentApp
 {
     public class Student
     {
         private string _name;
         public int Age { get; set; }
-        
+
         public string Name
         {
             get { return _name; }

@@ -46,7 +46,7 @@
             TextBoxFIO = new TextBox();
             panel1 = new Panel();
             RecordBook = new DataGridViewTextBoxColumn();
-            FIO = new DataGridViewTextBoxColumn();
+            FullName = new DataGridViewTextBoxColumn();
             Group = new DataGridViewTextBoxColumn();
             Department = new DataGridViewTextBoxColumn();
             Specification = new DataGridViewTextBoxColumn();
@@ -61,7 +61,7 @@
             DGViewStudents.AllowUserToDeleteRows = false;
             DGViewStudents.AllowUserToResizeRows = false;
             DGViewStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DGViewStudents.Columns.AddRange(new DataGridViewColumn[] { RecordBook, FIO, Group, Department, Specification, DateOfAdmission });
+            DGViewStudents.Columns.AddRange(new DataGridViewColumn[] { RecordBook, FullName, Group, Department, Specification, DateOfAdmission });
             DGViewStudents.Dock = DockStyle.Fill;
             DGViewStudents.Location = new Point(0, 0);
             DGViewStudents.Margin = new Padding(0);
@@ -251,12 +251,12 @@
             RecordBook.ReadOnly = true;
             RecordBook.Width = 106;
             // 
-            // FIO
+            // FullName
             // 
-            FIO.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            FIO.HeaderText = "ФИО";
-            FIO.Name = "FIO";
-            FIO.ReadOnly = true;
+            FullName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            FullName.HeaderText = "ФИО";
+            FullName.Name = "FullName";
+            FullName.ReadOnly = true;
             // 
             // Group
             // 
@@ -323,7 +323,7 @@
         private TextBox TextBoxFIO;
         private Panel panel1;
         private DataGridViewTextBoxColumn RecordBook;
-        private DataGridViewTextBoxColumn FIO;
+        private DataGridViewTextBoxColumn FullName;
         private DataGridViewTextBoxColumn Group;
         private DataGridViewTextBoxColumn Department;
         private DataGridViewTextBoxColumn Specification;
