@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection.Metadata.Ecma335;
 using System.Text.Json;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -14,7 +15,7 @@ namespace Laba9
         public Form1()
         {
             InitializeComponent();
-            FileTypeComboBox.Items.AddRange(new[] { "JSON", "XML" });
+            FileTypeComboBox.Items.AddRange(new[] { "JSON", "XML", "CSV" });
             specificationComboBox.Items.AddRange(new[] { "Информатика", "Физика", "Математика" });
 
             UpdateListView();
@@ -78,22 +79,27 @@ namespace Laba9
                 MessageBox.Show("Выберите формат файла!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            string filter = FileTypeValidate();
 
-            using (var saveDialog = new SaveFileDialog { Filter = "JSON files (*.json)|*.json|XML files (*.xml)|*.xml", Title = "Сохранить файл" })
+            using (var saveDialog = new SaveFileDialog { Filter = filter, Title = "Сохранить файл" })
             {
                 if (saveDialog.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        if (saveDialog.FilterIndex == 1)
+                        if (FileTypeComboBox.SelectedIndex == 0)
                         {
                             File.WriteAllText(saveDialog.FileName, JsonSerializer.Serialize(students));
                         }
-                        else if (saveDialog.FilterIndex == 2)
+                        else if (FileTypeComboBox.SelectedIndex == 1)
                         {
                             var serializer = new XmlSerializer(typeof(List<Student>));
                             using var writer = new StreamWriter(saveDialog.FileName);
                             serializer.Serialize(writer, students);
+                        }
+                        else
+                        {
+                            SaveToCsv(saveDialog.FileName);
                         }
 
                         MessageBox.Show("Файл успешно сохранён!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -108,21 +114,32 @@ namespace Laba9
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
-            using (var openDialog = new OpenFileDialog { Filter = "JSON files (*.json)|*.json|XML files (*.xml)|*.xml", Title = "Открыть файл" })
+            if (FileTypeComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите формат файла!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string filter = FileTypeValidate();
+
+            using (var openDialog = new OpenFileDialog { Filter = filter, Title = "Открыть файл" })
             {
                 if (openDialog.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        if (openDialog.FilterIndex == 1)
+                        if (FileTypeComboBox.SelectedIndex == 0)
                         {
                             students = JsonSerializer.Deserialize<List<Student>>(File.ReadAllText(openDialog.FileName)) ?? new List<Student>();
                         }
-                        else if (openDialog.FilterIndex == 2)
+                        else if (FileTypeComboBox.SelectedIndex == 1)
                         {
                             var serializer = new XmlSerializer(typeof(List<Student>));
                             using var reader = new StreamReader(openDialog.FileName);
                             students = (List<Student>)(serializer.Deserialize(reader) ?? new List<Student>());
+                        }
+                        else
+                        {
+                            students = LoadFromCsv(openDialog.FileName);
                         }
 
                         UpdateListView();
@@ -133,6 +150,62 @@ namespace Laba9
                     }
                 }
             }
+        }
+
+        private string FileTypeValidate(string filter = "")
+        {
+            if (FileTypeComboBox.SelectedItem.ToString() == "JSON")
+            {
+                filter = "JSON files (*.json)|*.json";
+            }
+            else if (FileTypeComboBox.SelectedItem.ToString() == "XML")
+            {
+                filter = "XML files (*.xml)|*.xml";
+            }
+            else
+            {
+                filter = "CSV files (*.csv)|*.csv";
+            }
+            return filter;
+        }
+
+        private void SaveToCsv(string fileName)
+        {
+            using (var writer = new StreamWriter(fileName))
+            {
+                writer.WriteLine("FIO,RecordNumber,Specification");
+                foreach (var student in students)
+                {
+                    writer.WriteLine($"{student.FIO},{student.RecordNumber},{student.Specification}");
+                }
+            }
+        }
+
+        private List<Student> LoadFromCsv(string fileName)
+        {
+            var studentsList = new List<Student>();
+
+            using (var reader = new StreamReader(fileName))
+            {
+                var header = reader.ReadLine(); // Skip header
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(',');
+
+                    if (values.Length == 3)
+                    {
+                        studentsList.Add(new Student
+                        {
+                            FIO = values[0],
+                            RecordNumber = values[1],
+                            Specification = values[2]
+                        });
+                    }
+                }
+            }
+
+            return studentsList;
         }
 
         private void EditStudent_Click(object sender, EventArgs e)

@@ -163,6 +163,7 @@
             Controls.Add(listViewStudent);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
+            MinimumSize = new Size(790, 349);
             Name = "Form1";
             Text = "Student";
             groupBox1.ResumeLayout(false);
