@@ -8,10 +8,18 @@ namespace Laba8._1
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            // Настройки конфигурации приложения
             ApplicationConfiguration.Initialize();
-            Application.Run(new StudentView());
+
+            // Создание экземпляров View и Repository
+            var studentView = new StudentView();
+            var studentRepository = new StudentRepository();
+
+            // Создание экземпляра Presenter, связывающего View и Repository
+            var studentPresenter = new StudentPresenter(studentView, studentRepository);
+
+            // Запуск формы
+            Application.Run(studentView);
         }
     }
 }

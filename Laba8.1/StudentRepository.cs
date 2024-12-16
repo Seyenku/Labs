@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using SQLitePCL;
 
 namespace Laba8._1
 {
@@ -8,13 +9,15 @@ namespace Laba8._1
 
         public StudentRepository()
         {
+            // Initialize SQLite provider
+            Batteries.Init();
             InitializeDatabase();
         }
 
         private void InitializeDatabase()
         {
             using var connection = new SqliteConnection(_connectionString);
-            connection.Open();
+            connection.Open(); 
             var command = new SqliteCommand(
                 @"CREATE TABLE IF NOT EXISTS Student (
                 RecordBook TEXT PRIMARY KEY,
@@ -22,7 +25,7 @@ namespace Laba8._1
                 Department TEXT,
                 Specification TEXT,
                 DateOfAdmission TEXT,
-                Group TEXT
+                [Group] TEXT
             );", connection);
             command.ExecuteNonQuery();
         }
@@ -54,7 +57,7 @@ namespace Laba8._1
             using var connection = new SqliteConnection(_connectionString);
             connection.Open();
             var command = new SqliteCommand(
-                @"INSERT INTO Student (RecordBook, FullName, Department, Specification, DateOfAdmission, Group)
+                @"INSERT INTO Student (RecordBook, FullName, Department, Specification, DateOfAdmission, [Group])
               VALUES (@RecordBook, @FullName, @Department, @Specification, @DateOfAdmission, @Group);", connection);
             command.Parameters.AddWithValue("@RecordBook", student.RecordBook);
             command.Parameters.AddWithValue("@FullName", student.FullName);
@@ -71,7 +74,7 @@ namespace Laba8._1
             connection.Open();
             var command = new SqliteCommand(
                 @"UPDATE Student SET FullName=@FullName, Department=@Department, 
-              Specification=@Specification, DateOfAdmission=@DateOfAdmission, Group=@Group 
+              Specification=@Specification, DateOfAdmission=@DateOfAdmission, [Group]=@Group 
               WHERE RecordBook=@RecordBook;", connection);
             command.Parameters.AddWithValue("@RecordBook", student.RecordBook);
             command.Parameters.AddWithValue("@FullName", student.FullName);
@@ -102,11 +105,10 @@ namespace Laba8._1
 
         public List<string> GetSpecificationsByDepartment(string department)
         {
-            // Dummy data, replace with a real query if specifications are stored in a separate table
             return department switch
             {
-                "Engineering" => new List<string> { "Software Engineering", "Civil Engineering" },
-                "Science" => new List<string> { "Physics", "Biology" },
+                "ИТНИТ" => new List<string> { "Прикладная информатика", "Физика" },
+                "ИЭУ" => new List<string> { "Экономика", "Менеджмент" },
                 _ => new List<string>()
             };
         }
