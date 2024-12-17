@@ -17,7 +17,7 @@ namespace Laba8._1
         private void InitializeDatabase()
         {
             using var connection = new SqliteConnection(_connectionString);
-            connection.Open(); 
+            connection.Open();
             var command = new SqliteCommand(
                 @"CREATE TABLE IF NOT EXISTS Student (
                 RecordBook TEXT PRIMARY KEY,

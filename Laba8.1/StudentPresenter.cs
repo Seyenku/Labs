@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic.Logging;
-
-namespace Laba8._1
+﻿namespace Laba8._1
 {
     public class StudentPresenter
     {
